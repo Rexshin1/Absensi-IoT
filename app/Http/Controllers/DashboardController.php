@@ -72,7 +72,42 @@ class DashboardController extends Controller
 
     public function profile(): View
     {
-        return view('profile.index', ['title' => 'User Profile | MatDash']);
+        $adminProfile = session('admin_profile', [
+            'name' => 'Administrator',
+            'email' => 'admin@absensi-iot.com',
+            'phone' => '0812-3456-7890',
+            'position' => 'Super Admin',
+            'username' => 'admin_absensi',
+        ]);
+
+        return view('profile.index', [
+            'title' => 'My Profile',
+            'adminProfile' => $adminProfile,
+        ]);
+    }
+
+    public function updateProfile(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['nullable', 'string', 'max:50'],
+            'position' => ['nullable', 'string', 'max:100'],
+            'username' => ['required', 'string', 'max:100'],
+            'password' => ['nullable', 'string', 'min:6'],
+        ]);
+
+        $adminProfile = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'phone' => $validated['phone'] ?? '-',
+            'position' => $validated['position'] ?? 'Administrator',
+            'username' => $validated['username'],
+        ];
+
+        session(['admin_profile' => $adminProfile]);
+
+        return redirect()->route('profile')->with('success', 'Profil Admin & Akun berhasil diperbarui!');
     }
 
     public function students(): View

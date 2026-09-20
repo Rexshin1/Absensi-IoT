@@ -14,6 +14,7 @@ Route::controller(DashboardController::class)->group(function () {
     });
 
     Route::get('user-profile', 'profile')->name('profile');
+    Route::post('user-profile', 'updateProfile')->name('profile.update');
     Route::get('master-data', 'masterData')->name('master-data.index');
     Route::get('students/create', 'students')->name('students.create');
     Route::get('students', 'studentList')->name('students.index');
