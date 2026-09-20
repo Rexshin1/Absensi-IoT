@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ $title ?? 'MatDash Laravel' }}</title>
+    <title>{{ $title ?? 'Sistem Absensi IoT' }}</title>
     <link rel="icon" href="{{ asset('images/logos/ukm-pagar-nusa.jpeg') }}" type="image/jpeg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,19 +28,17 @@
     </style>
     @stack('head')
 </head>
-<body class="text-sm overflow-x-hidden bg-background text-link dark:bg-dark dark:text-darklink">
-    <div class="flex w-full min-h-screen">
+<body class="overflow-x-hidden bg-lightgray text-sm text-link dark:bg-dark dark:text-darklink">
+    <div class="min-h-screen">
         @include('partials.sidebar')
 
-        <div class="page-wrapper flex w-full xl:ml-[270px]">
-            <div class="body-wrapper w-full">
-                @include('partials.header')
-                <main class="bg-lightgray dark:bg-dark mr-3 rounded-3xl min-h-[90vh]">
-                    <div class="container mx-auto px-6 py-30">
-                        @yield('content')
-                    </div>
-                </main>
-            </div>
+        <div class="min-h-screen xl:pl-[280px]">
+            @include('partials.header')
+            <main class="min-h-[calc(100vh-72px)] bg-lightgray py-4 dark:bg-dark sm:py-6">
+                <div class="mx-auto w-full max-w-[1600px] px-4 sm:px-6 lg:px-8">
+                    @yield('content')
+                </div>
+            </main>
         </div>
     </div>
     <script src="{{ asset('vendor/datatables/jquery-3.7.1.min.js') }}?v=1" defer></script>

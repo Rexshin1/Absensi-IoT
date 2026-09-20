@@ -1,5 +1,7 @@
-<aside class="fixed left-0 top-0 z-30 h-screen w-[270px] border-r border-defaultBorder/40 bg-background dark:bg-darkgray xl:block" :class="mobileSidebarOpen ? 'block' : 'hidden'" @click.outside="mobileSidebarOpen = false">
-    <div class="flex h-[72px] items-center overflow-hidden px-5">
+<div x-cloak x-show="mobileSidebarOpen" x-transition.opacity class="fixed inset-0 z-30 bg-black/40 backdrop-blur-[1px] xl:hidden" @click="mobileSidebarOpen = false"></div>
+
+<aside class="fixed inset-y-0 left-0 z-40 flex w-[280px] -translate-x-full flex-col border-r border-defaultBorder/50 bg-background shadow-2xl shadow-black/10 transition-transform duration-300 ease-out dark:bg-darkgray xl:translate-x-0 xl:shadow-none" :class="mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full'">
+    <div class="flex h-[72px] shrink-0 items-center border-b border-defaultBorder/50 px-5">
         <a href="{{ route('dashboard') }}" class="flex items-center gap-3">
             <img src="{{ asset('images/logos/ukm-pagar-nusa.jpeg') }}" alt="Logo UKM Pencak Silat NU Pagar Nusa" width="42" height="42" class="h-10 w-10 rounded-xl object-cover shadow-sm ring-2 ring-primary/20">
             <div class="flex flex-col">
@@ -12,7 +14,7 @@
         </button>
     </div>
 
-    <nav class="h-[calc(100vh-72px)] overflow-y-auto px-4 py-4 space-y-5">
+    <nav class="flex-1 overflow-y-auto px-4 py-5 space-y-6">
         <div>
             <p class="mb-2 px-3 text-[11px] font-bold uppercase tracking-wider text-charcoal/70 dark:text-darkcharcoal">Menu Utama</p>
             <div class="space-y-1.5">

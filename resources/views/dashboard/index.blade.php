@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="grid grid-cols-12 gap-30">
+<div class="grid grid-cols-12 gap-5 sm:gap-6">
     <div class="col-span-12">
         <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -10,13 +10,13 @@
             </div>
             <a href="{{ route('attendance.recap') }}" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90">Lihat rekap</a>
         </div>
-        <div class="flex gap-30 overflow-x-auto pb-2">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             @foreach ([
                 ['label' => 'Total murid', 'value' => $attendanceStats['totalStudents'], 'icon' => 'solar:user-circle-outline', 'color' => 'primary'],
                 ['label' => 'Hadir', 'value' => $attendanceStats['present'], 'icon' => 'tabler:check', 'color' => 'success'],
                 ['label' => 'Belum absen', 'value' => $attendanceStats['absent'], 'icon' => 'solar:clock-circle-linear', 'color' => 'secondary'],
             ] as $stat)
-            <div class="min-w-[220px] flex-1">
+            <div>
                 <div class="h-full rounded-xl bg-white p-5 shadow-xs dark:bg-darkgray">
                     <div class="flex items-center gap-4">
                         <div class="rounded-md bg-light{{ $stat['color'] }} p-3 text-{{ $stat['color'] }}"><x-icon name="{{ $stat['icon'] }}" size="24" /></div>
@@ -78,5 +78,6 @@
                 </table>
             </div>
         </div>
-</div>
+        </div>
+    </div>
 @endsection

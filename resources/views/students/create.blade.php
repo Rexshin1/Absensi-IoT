@@ -116,7 +116,7 @@
             <div class="my-6 border-t border-gray-100 dark:border-white/5"></div>
 
             {{-- Actions --}}
-            <div class="flex items-center justify-end gap-3">
+            <div class="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-end">
                 <a href="{{ route('students.index') }}"
                     class="rounded-xl border border-defaultBorder px-5 py-2.5 text-sm font-medium text-link transition hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-white/5">
                     Batal
