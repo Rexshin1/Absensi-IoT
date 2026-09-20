@@ -14,7 +14,7 @@ class AttendanceController extends Controller
     {
         $validated = $request->validate([
             'finger_id' => ['required'],
-            'heart_rate' => ['required', 'integer', 'between:30,240'],
+            'heart_rate' => ['required', 'integer', 'min:0', 'max:240'],
         ]);
 
         if (! is_int($validated['finger_id']) && ! is_string($validated['finger_id'])) {

@@ -34,4 +34,58 @@ class EnrollmentController extends Controller
             'finger_id' => $validated['finger_id'],
         ]);
     }
+
+    /**
+     * Mengecek nama murid berdasarkan fingerprint_id untuk tampilan LCD ESP32.
+     * GET /api/fingerprint/cek-nama/{id}
+     */
+    public function checkName(string $id): JsonResponse
+    {
+        $athlete = \App\Models\Athlete::where('fingerprint_id', $id)->first();
+
+        if (! $athlete) {
+            return response()->json([
+                'success' => false,
+                'nama' => 'Tdk Dikenal',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'nama' => $athlete->name,
+        ]);
+    }
+
+    /**
+     * Mengecek mode aktif perangkat (absen/daftar) untuk ESP32.
+     * GET /api/device/mode
+     */
+    public function getMode(): JsonResponse
+    {
+        $mode = \Illuminate\Support\Facades\Cache::get('device_mode', 'absen');
+
+        return response()->json([
+            'success' => true,
+            'mode' => $mode,
+        ]);
+    }
+
+    /**
+     * Mengubah mode aktif perangkat dari Web Admin.
+     * POST /api/device/mode
+     */
+    public function setMode(Request $request): JsonResponse
+    {
+        $validated = $request->validate([
+            'mode' => ['required', 'in:absen,daftar'],
+        ]);
+
+        \Illuminate\Support\Facades\Cache::put('device_mode', $validated['mode'], now()->addHours(24));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Mode perangkat berhasil diubah ke ' . $validated['mode'],
+            'mode' => $validated['mode'],
+        ]);
+    }
 }

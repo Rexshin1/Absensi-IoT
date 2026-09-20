@@ -20,5 +20,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/attendances', [AttendanceController::class, 'store']);
+Route::get('/device/mode', [EnrollmentController::class, 'getMode']);
+Route::post('/device/mode', [EnrollmentController::class, 'setMode']);
+Route::get('/fingerprint/cek-nama/{id}', [EnrollmentController::class, 'checkName']);
 Route::post('/fingerprint/enroll', [EnrollmentController::class, 'enroll']);
+Route::post('/attendance', [AttendanceController::class, 'store']);
+Route::post('/attendances', [AttendanceController::class, 'store']);

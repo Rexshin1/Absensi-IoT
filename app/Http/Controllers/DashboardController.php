@@ -15,6 +15,8 @@ class DashboardController extends Controller
 {
     public function index(): View
     {
+        \Illuminate\Support\Facades\Cache::put('device_mode', 'absen', now()->addHours(24));
+
         $totalStudents = Schema::hasTable('athletes') ? Athlete::count() : User::count();
         $todayAttendances = collect();
         $attendanceStats = [
@@ -75,11 +77,15 @@ class DashboardController extends Controller
 
     public function students(): View
     {
+        \Illuminate\Support\Facades\Cache::put('device_mode', 'daftar', now()->addMinutes(30));
+
         return view('students.create', ['title' => 'Daftar Murid']);
     }
 
     public function studentList(Request $request): View
     {
+        \Illuminate\Support\Facades\Cache::put('device_mode', 'absen', now()->addHours(24));
+
         $search = trim((string) $request->query('search', ''));
         $students = User::query()
             ->when($search !== '', function ($query) use ($search) {
