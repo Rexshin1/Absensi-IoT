@@ -154,7 +154,7 @@ main {
   }
 
   input::placeholder {
-    @apply text-darklink dark:text-darklink
+    @apply text-darklink dark:text-darklink;
   }
 
   button {

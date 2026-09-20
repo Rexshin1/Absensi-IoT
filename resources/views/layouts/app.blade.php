@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/datatables/dataTables.dataTables.min.css') }}?v=1">
     <link rel="stylesheet" href="{{ asset('vendor/datatables/buttons.dataTables.min.css') }}?v=1">
     <style>[x-cloak] { display: none !important; } body { font-family: 'Manrope', sans-serif; }</style>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-DgxHUZ_w.css') }}">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
         :root {
             --color-primary: #159447;
@@ -49,7 +49,6 @@
     <script src="{{ asset('vendor/datatables/vfs_fonts.js') }}?v=1" defer></script>
     <script src="{{ asset('vendor/datatables/dataTables.buttons.min.js') }}?v=1" defer></script>
     <script src="{{ asset('vendor/datatables/buttons.html5.min.js') }}?v=1" defer></script>
-    <script src="{{ asset('build/assets/app-CwXvFWIj.js') }}" defer></script>
     <script src="{{ asset('js/datatables-init.js') }}?v=2" defer></script>
     @stack('scripts')
 </body>
