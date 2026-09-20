@@ -26,5 +26,7 @@ Route::controller(DashboardController::class)->group(function () {
     Route::get('apps/blog/post', 'blogPost')->name('apps.blog.post');
     Route::get('apps/blog/detail/{slug}', 'blogDetail')->name('apps.blog.detail');
     Route::get('auth/login', 'login')->name('login');
+    Route::post('auth/login', 'postLogin')->name('login.post');
+    Route::match(['get', 'post'], 'auth/logout', 'logout')->name('logout');
     Route::get('auth/register', 'register')->name('register');
 });

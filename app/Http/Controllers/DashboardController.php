@@ -241,9 +241,42 @@ class DashboardController extends Controller
         return view('apps.blog.detail', ['title' => 'Blog Detail | MatDash', 'slug' => $slug]);
     }
 
-    public function login(): View
+    public function login()
     {
-        return view('auth.login', ['title' => 'Login | MatDash']);
+        if (session('admin_logged_in')) {
+            return redirect()->route('dashboard');
+        }
+
+        return view('auth.login', ['title' => 'Login Admin | UKM Absensi IoT']);
+    }
+
+    public function postLogin(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string'],
+        ]);
+
+        $adminProfile = session('admin_profile', [
+            'username' => 'admin_absensi',
+            'email' => 'admin@absensi-iot.com',
+            'name' => 'Administrator',
+        ]);
+
+        $input = trim($request->input('username'));
+
+        if (in_array(strtolower($input), [strtolower($adminProfile['username']), strtolower($adminProfile['email']), 'admin'])) {
+            session(['admin_logged_in' => true]);
+            return redirect()->route('dashboard')->with('success', 'Selamat datang kembali, ' . $adminProfile['name'] . '!');
+        }
+
+        return back()->withInput()->withErrors(['login' => 'Username atau password yang Anda masukkan salah.']);
+    }
+
+    public function logout(): RedirectResponse
+    {
+        session()->forget('admin_logged_in');
+        return redirect()->route('login')->with('success', 'Anda telah berhasil keluar dari sistem.');
     }
 
     public function register(): View
