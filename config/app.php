@@ -68,9 +68,13 @@ return [
     | will be used by the PHP date and date-time functions. We have gone
     | ahead and set this to a sensible default for you out of the box.
     |
+    | Sistem absensi ini dipakai di Indonesia, sehingga default diarahkan ke
+    | Asia/Jakarta (WIB) agar jam absensi (created_at) dan penentuan
+    | "hari ini" (today()) akurat. Override lewat APP_TIMEZONE bila perlu.
+    |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'Asia/Jakarta'),
 
     /*
     |--------------------------------------------------------------------------

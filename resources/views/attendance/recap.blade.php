@@ -99,6 +99,7 @@
                             {{-- Waktu --}}
                             <td class="whitespace-nowrap p-4 text-darklink">
                                 {{ $attendance->created_at?->format('H:i:s') ?? '-' }}
+                                <span class="ml-1 text-xs text-darklink">WIB</span>
                             </td>
 
                         </tr>

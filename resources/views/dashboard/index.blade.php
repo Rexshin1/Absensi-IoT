@@ -5,7 +5,7 @@
     <div class="col-span-12">
         <div class="mb-6 flex flex-wrap items-end justify-between gap-3">
             <div>
-                <p class="mb-1 text-sm text-darklink">{{ now()->translatedFormat('l, d F Y') }}</p>
+                <p class="mb-1 text-sm text-darklink">{{ now()->translatedFormat('l, d F Y') }} &bull; jam {{ now()->format('H:i') }} WIB</p>
                 <h1 class="text-2xl font-semibold text-dark dark:text-white">Ringkasan absensi hari ini</h1>
             </div>
             <a href="{{ route('attendance.recap') }}" class="rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-90">Lihat rekap</a>
@@ -30,7 +30,7 @@
 
     <div class="col-span-12">
         <div class="rounded-xl bg-white p-6 shadow-xs dark:bg-darkgray">
-            <div class="mb-5 flex items-center justify-between"><h5 class="card-title">Absensi hari ini</h5><a href="{{ route('attendance.recap') }}" class="text-sm text-primary hover:underline">Lihat semua</a></div>
+            <div class="mb-5 flex items-center justify-between"><h5 class="card-title">Absensi hari ini <span class="text-xs font-normal text-darklink">(Waktu WIB)</span></h5><a href="{{ route('attendance.recap') }}" class="text-sm text-primary hover:underline">Lihat semua</a></div>
             <div class="overflow-x-auto">
                 <table class="js-data-table w-full text-left text-sm">
                     <thead class="border-y border-defaultBorder text-darklink">
@@ -42,6 +42,7 @@
                             <th class="whitespace-nowrap p-4 font-medium">Kategori</th>
                             <th class="whitespace-nowrap p-4 font-medium">Detak jantung</th>
                             <th class="whitespace-nowrap p-4 font-medium">Status</th>
+                            <th class="whitespace-nowrap p-4 font-medium">Waktu</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,6 +72,10 @@
                                     <span class="rounded-md bg-light{{ $statusColor }} px-2 py-1 text-xs font-medium text-{{ $statusColor }}">
                                         {{ $statusLabel }}
                                     </span>
+                                </td>
+                                <td class="whitespace-nowrap p-4 font-medium text-dark dark:text-white">
+                                    {{ $attendance->created_at?->format('H:i:s') ?? '-' }}
+                                    <span class="ml-1 text-xs font-normal text-darklink">WIB</span>
                                 </td>
                             </tr>
                         @endforeach
